@@ -1,0 +1,24 @@
+@keyframes float { 0%, 100% { transform: translateY(0) } 50% { transform: translateY(-14px) } }
+@keyframes cue { 0% { top: -100% } 60%, 100% { top: 100% } }
+@keyframes shimmer { to { background-position: -150% 0 } }
+@keyframes rise {
+  0% { transform: translateY(0) translateX(0) scale(1); opacity: 0 }
+  10% { opacity: .9 }
+  90% { opacity: .5 }
+  100% { transform: translateY(-105vh) translateX(var(--drift, 30px)) scale(.4); opacity: 0 }
+}
+@keyframes flicker { 0%, 100% { opacity: 1; transform: scale(1) } 40% { opacity: .75; transform: scale(.94) } 70% { opacity: 1; transform: scale(1.05) } }
+@keyframes spin-slow { to { transform: rotate(360deg) } }
+@keyframes glow { 0%, 100% { opacity: .75 } 50% { opacity: 1 } }
+
+.ember { animation: rise var(--dur, 12s) linear var(--delay, 0s) infinite; }
+.float-chip { animation: float 6s ease-in-out infinite; }
+.chip-2 { animation-delay: -2s; } .chip-3 { animation-delay: -4s; }
+.sun-glow { animation: glow 5s ease-in-out infinite; }
+.diya-flame { transform-origin: center bottom; animation: flicker 1.6s ease-in-out infinite; }
+.mandala { animation: spin-slow 90s linear infinite; transform-origin: center; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  .ember { display: none; }
+}

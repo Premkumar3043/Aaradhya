@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aaradhya | Discover. Experience. Connect with Divinity.</title>
+  <meta name="description" content="Aaradhya helps you discover temples across India and plan your pilgrimage in one place." />
+  <meta name="theme-color" content="#090A0D" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='10' fill='%23191919'/%3E%3Cpath d='M10 40V24a14 14 0 0 1 28 0v16' fill='none' stroke='%23C49A48' stroke-width='2.5'/%3E%3Ccircle cx='24' cy='24' r='5' fill='%23C49A48'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://upload.wikimedia.org" />
+  <link rel="dns-prefetch" href="https://upload.wikimedia.org" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <link rel="stylesheet" href="css/visual-refresh.css" />
+  <link rel="stylesheet" href="css/cinematic-polish.css" />
+  <link rel="stylesheet" href="css/final-clean.css" />
+</head>
+<body class="is-intro">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+  <div class="scroll-artwork" id="scrollArtwork" aria-hidden="true">
+    <img src="assets/images/krishna-hero.webp" alt="" loading="eager" decoding="async" />
+    <span class="scroll-artwork-shade"></span>
+  </div>
+
+  <!-- 01 Cinematic opening -->
+  <div class="intro" id="intro" role="dialog" aria-label="Welcome to Aaradhya">
+    <div class="intro-bloom" id="introBloom"></div>
+    <div class="intro-inner">
+      <div class="intro-flower-stage" aria-hidden="true">
+        <video
+          class="intro-lotus-animation"
+          id="introLotusAnimation"
+          src="assets/images/lotus-bloom-sequence.webm"
+          poster="assets/images/lotus-bloom-poster.png"
+          muted
+          playsinline
+          preload="auto"
+          disablepictureinpicture
+          aria-hidden="true"
+        ></video>
+      </div>
+      <div class="intro-word" id="introWord" aria-label="Aaradhya">AARADHYA</div>
+      <p class="intro-tag" id="introTag">A thoughtful companion for every sacred journey.</p>
+      <div class="intro-actions" id="introActions">
+        <button class="btn btn-gold" id="introBegin" type="button">Begin your journey</button>
+        <button class="intro-skip" id="introSkip" type="button">Skip intro</button>
+      </div>
+    </div>
+  </div>
+
+  <header class="site-header" id="header">
+    <div class="container header-inner">
+      <a class="brand" href="#home" aria-label="Aaradhya home">
+        <svg class="brand-mark" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <path d="M32 4 A28 28 0 1 1 31.99 4" stroke="#E3C98F" stroke-opacity=".4" stroke-width="1.1"/>
+          <path d="M12 54V32a20 20 0 0 1 40 0v22" stroke="#C49A48" stroke-width="2.1" stroke-linecap="round"/>
+          <path d="M32 9C25 17 25 24 32 30C39 24 39 17 32 9Z" fill="#E3C98F"/>
+          <path d="M32 40C24 31 16 34 14 43C22 46 28 44 32 40C36 44 42 46 50 43C48 34 40 31 32 40Z" stroke="#C49A48" stroke-width="1.7" stroke-linejoin="round"/>
+          <path d="M20 54H44M25 49H39" stroke="#C49A48" stroke-width="1.7" stroke-linecap="round"/>
+          <circle cx="32" cy="35" r="2" fill="#E3C98F"/>
+        </svg>
+        <span class="brand-name">Aaradhya</span>
+      </a>
+      <nav class="nav" id="nav" aria-label="Main">
+        <a href="#home">Home</a>
+        <a href="#temples">Explore Temples</a>
+        <a href="#packages">Pilgrimage Packages</a>
+        <a href="#how">How It Works</a>
+        <a href="#about">About Aaradhya</a>
+        <a href="#help">Help</a>
+      </nav>
+      <div class="header-tools">
+        <button class="icon-btn" id="searchBtn" type="button" aria-label="Search temples">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        </button>
+        <select class="lang" aria-label="Language" title="More languages are planned">
+          <option>English</option><option disabled>Telugu (soon)</option><option disabled>Hindi (soon)</option>
+        </select>
+        <a class="btn btn-gold btn-sm" href="#plan">Plan Your Journey</a>
+        <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 8h16M4 16h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- 02 Hero -->
+    <section class="hero" id="home" aria-label="Introduction">
+      <picture class="hero-photo-backdrop" aria-hidden="true">
+        <source media="(max-width: 760px)" srcset="assets/images/krishna-hero-mobile.webp" />
+        <img src="assets/images/krishna-hero.webp" alt="" loading="eager" decoding="async" />
+      </picture>
+      <picture class="hero-photo-frame" aria-hidden="true">
+        <source media="(max-width: 760px)" srcset="assets/images/krishna-hero-mobile.webp" />
+        <img class="hero-photo" src="assets/images/krishna-hero.webp" alt="Artistic portrait of Lord Krishna with ornate jewellery and golden flowers" fetchpriority="high" decoding="async" onload="this.classList.add('ok');this.closest('.hero').classList.add('has-photo')" onerror="this.closest('.hero-photo-frame').remove()" />
+      </picture>
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-scene" aria-hidden="true">
+        <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice">
+          <defs>
+            <radialGradient id="hsun"><stop offset="0" stop-color="#fff0c8"/><stop offset=".4" stop-color="#C49A48" stop-opacity=".8"/><stop offset="1" stop-color="#C49A48" stop-opacity="0"/></radialGradient>
+            <linearGradient id="hfog" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#642D32" stop-opacity="0"/><stop offset="1" stop-color="#C49A48" stop-opacity=".35"/></linearGradient>
+          </defs>
+          <g class="layer" data-speed="-6"><circle class="sun-glow" cx="1000" cy="560" r="330" fill="url(#hsun)"/></g>
+          <g class="layer" data-speed="4"><path d="M0 720 C200 640 330 700 520 650 C700 600 820 690 1000 650 C1200 610 1320 680 1440 640 V900 H0Z" fill="#2a1417" opacity=".85"/></g>
+          <g class="layer" data-speed="9" id="heroTemple"></g>
+          <g class="layer" data-speed="14"><path d="M0 800 C260 770 460 820 720 790 C980 760 1200 810 1440 780 V900 H0Z" fill="#120a0b"/><rect y="700" width="1440" height="200" fill="url(#hfog)"/></g>
+        </svg>
+      </div>
+      <div class="embers" id="embers" aria-hidden="true"></div>
+      <div class="float-chip chip-1" aria-hidden="true"><i></i>Darshan guidance</div>
+      <div class="float-chip chip-2" aria-hidden="true"><i></i>Travel and stay</div>
+      <div class="float-chip chip-3" aria-hidden="true"><i></i>Plan with family</div>
+      <div class="container">
+        <div class="hero-content">
+          <p class="hero-eyebrow hero-fade"><span class="hero-status-dot"></span> INDIA, THROUGH A MORE THOUGHTFUL LENS</p>
+          <div class="gold-rule hero-rule"></div>
+          <h1 id="heroTitle"><span class="line">A journey closer</span><span class="line">to what matters.</span></h1>
+          <p class="lead hero-fade">Discover sacred destinations across India and bring temple guides, travel, stays and darshan planning together in one calm place.</p>
+          <div class="hero-cta hero-fade">
+            <a class="btn btn-gold" href="#plan">Plan Your Journey</a>
+            <a class="btn btn-line" href="#temples">Explore Temples</a>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-cue" aria-hidden="true"></div>
+    </section>
+
+    <!-- 03 Floating search panel -->
+    <div class="search-wrap container">
+      <form class="search-panel" id="searchPanel" aria-label="Journey search">
+        <label class="field"><span>Destination</span>
+          <select id="sDest"><option value="">Anywhere in India</option></select></label>
+        <label class="field"><span>Travel date</span><input type="date" id="sDate" /></label>
+        <label class="field"><span>Travellers</span>
+          <select id="sTrav"><option>1 traveller</option><option selected>2 travellers</option><option>3 to 4 travellers</option><option>5 to 8 travellers</option><option>9 or more</option></select></label>
+        <label class="field"><span>Journey type</span>
+          <select id="sType"><option value="all">Any journey</option><option value="family">Family</option><option value="senior">Senior-friendly</option><option value="multi">Multi-temple route</option><option value="short">Short visit</option></select></label>
+        <button class="btn btn-gold" type="submit">Find journeys</button>
+      </form>
+    </div>
+
+    <div class="marquee" aria-hidden="true"><div class="track" id="marquee"></div></div>
+
+    <!-- 04 Featured destinations -->
+    <section class="scroll-float-section" id="featured">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="kicker">Featured destinations</span>
+          <h2>Places that have drawn pilgrims for centuries.</h2>
+          <p>Start with a destination that speaks to you. Each guide explains what to expect before you plan anything.</p>
+        </div>
+        <div class="feature-grid" id="featureGrid" data-stagger></div>
+      </div>
+    </section>
+
+    <!-- 05 The Aaradhya difference -->
+    <section class="on-dark scroll-float-section" id="about">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="kicker">The Aaradhya difference</span>
+          <h2>One calm place for the whole journey.</h2>
+          <p>Instead of jumping between temple portals, maps, hotel apps and agents, Aaradhya brings the steps together.</p>
+        </div>
+        <div class="pillars" data-stagger>
+          <div class="pillar"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="17"/><path d="M30 18l-4 10-10 4 4-10z"/></svg><h3>Discover</h3><p>Read clear temple guides with history, location and visiting notes.</p></div>
+          <div class="pillar"><svg viewBox="0 0 48 48"><path d="M8 38c8-2 6-12 14-12s6 10 14 8"/><circle cx="8" cy="38" r="3"/><circle cx="38" cy="12" r="4"/><path d="M38 16v6"/></svg><h3>Plan</h3><p>Turn dates, group size and preferences into a suggested route.</p></div>
+          <div class="pillar"><svg viewBox="0 0 48 48"><rect x="6" y="14" width="16" height="20" rx="8"/><rect x="26" y="14" width="16" height="20" rx="8"/><path d="M18 24h12"/></svg><h3>Coordinate</h3><p>See travel, stay and darshan steps side by side in one itinerary.</p></div>
+          <div class="pillar"><svg viewBox="0 0 48 48"><path d="M24 6l15 6v11c0 10-7 16-15 19-8-3-15-9-15-19V12z"/><path d="M17 24l5 5 9-10"/></svg><h3>Travel with confidence</h3><p>Know what is official, what is estimated and what still needs checking.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 Packages -->
+    <section class="scroll-float-section" id="packages">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="kicker">Curated pilgrimage packages</span>
+          <h2>Journeys shaped around how you travel.</h2>
+          <p>Choose a route, read what is included and what is not, then send an enquiry.</p>
+        </div>
+        <div class="chips" id="pkgChips" role="group" aria-label="Filter packages" data-reveal>
+          <button class="chip" data-f="all" aria-pressed="true">All journeys</button>
+          <button class="chip" data-f="family" aria-pressed="false">Family</button>
+          <button class="chip" data-f="senior" aria-pressed="false">Senior-friendly</button>
+          <button class="chip" data-f="multi" aria-pressed="false">Multi-temple</button>
+          <button class="chip" data-f="short" aria-pressed="false">Short visit</button>
+        </div>
+        <div class="pkg-grid" id="pkgGrid" data-stagger></div>
+        <p class="demo-note">Demo content: itineraries and prices on this page are examples for design purposes and are not live offers or confirmed availability.</p>
+      </div>
+    </section>
+
+    <!-- 07 How it works -->
+    <section class="section on-dark" id="how">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="kicker">How it works</span>
+          <h2>From first inspiration to the journey itself.</h2>
+        </div>
+        <div class="how" id="howSteps" data-stagger>
+          <div class="how-line" aria-hidden="true"><span id="howFill"></span></div>
+          <div class="step"><div class="step-dot">1</div><div><h3>Discover</h3><p>Browse temples and read the guide.</p></div></div>
+          <div class="step"><div class="step-dot">2</div><div><h3>Plan</h3><p>Choose dates, travellers and preferences.</p></div></div>
+          <div class="step"><div class="step-dot">3</div><div><h3>Review</h3><p>Check inclusions, exclusions and the itinerary.</p></div></div>
+          <div class="step"><div class="step-dot">4</div><div><h3>Enquire</h3><p>Send your details to the team.</p></div></div>
+          <div class="step"><div class="step-dot">5</div><div><h3>Prepare</h3><p>Receive a clear checklist and trip summary.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 Destination story -->
+    <section class="section on-maroon" id="story">
+      <div class="container story">
+        <div class="story-art" id="storyArt" data-reveal></div>
+        <div data-reveal>
+          <span class="kicker">A deeper destination story</span>
+          <h2>Kashi, where the day begins at the river.</h2>
+          <p>Varanasi rises along the western bank of the Ganga. Pilgrims arrive for darshan at Kashi Vishwanath, one of the twelve Jyotirlingas, and stay for the ghats, where mornings begin with boat rides and evenings close with the Ganga aarti.</p>
+          <p>The old city is a maze of narrow lanes, so the best plans keep a slow pace, a trusted guide on request and clear notes on timings.</p>
+          <dl class="facts">
+            <div><dt>Deity</dt><dd>Lord Vishwanath</dd></div>
+            <div><dt>Best season</dt><dd>October to March</dd></div>
+            <div><dt>Suggested stay</dt><dd>2 to 4 days</dd></div>
+          </dl>
+          <button class="btn btn-gold" data-open-temple="varanasi" type="button">Read the full guide</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Explore Temples -->
+    <section class="section" id="temples">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="kicker">Explore temples</span>
+          <h2>Find a temple by name, place or deity.</h2>
+        </div>
+        <div class="toolbar" data-reveal>
+          <label class="field"><span>Search</span><input type="search" id="tSearch" placeholder="Temple, city, state or deity" /></label>
+          <label class="field"><span>State</span><select id="tState"><option value="">All states</option></select></label>
+          <label class="field"><span>Deity</span><select id="tDeity"><option value="">All</option><option>Shiva</option><option>Vishnu</option><option>Devi</option></select></label>
+          <label class="field"><span>Sort</span><select id="tSort"><option value="featured">Featured</option><option value="az">A to Z</option><option value="state">State</option></select></label>
+          <button class="btn btn-line btn-sm" id="tReset" type="button" style="color:var(--charcoal)">Reset</button>
+        </div>
+        <p class="sr-only" id="tCount" aria-live="polite"></p>
+        <div class="t-grid" id="tGrid" data-stagger></div>
+      </div>
+    </section>
+
+    <!-- 09 Trust & clarity -->
+    <section class="section on-sand" id="trust">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="kicker">Trust and clarity</span>
+          <h2>Clear about what we know and what we do not.</h2>
+        </div>
+        <div class="trust" data-stagger>
+          <div class="trust-item"><h3>Official or partner</h3><p>Official temple information, our editorial guidance and partner services are kept separate and labelled.</p></div>
+          <div class="trust-item"><h3>Sources and dates</h3><p>Time-sensitive facts such as timings and rules will show a source and the date they were last checked.</p></div>
+          <div class="trust-item"><h3>Enquiry, not booking</h3><p>In this prototype the form is a demo. Nothing is booked or paid for here.</p></div>
+          <div class="trust-item"><h3>Honest pricing</h3><p>Prices show what is included, what is not and what they are based on before any payment.</p></div>
+        </div>
+        <p class="disclaimer" data-reveal>Aaradhya is an independent planning platform. It is not affiliated with, or endorsed by, any temple trust unless stated. Temple names are used only to describe destinations.</p>
+      </div>
+    </section>
+
+    <!-- Plan your journey -->
+    <section class="section on-maroon" id="plan">
+      <div class="container wizard">
+        <div class="wizard-intro" data-reveal>
+          <span class="kicker">Plan your journey</span>
+          <h2>Tell us about your pilgrimage.</h2>
+          <p>Seven short steps. Optional questions are marked, and you can go back at any time.</p>
+          <ul class="wizard-side">
+            <li>Preferences are not reservations.</li>
+            <li>Ask for help choosing travel or stay.</li>
+            <li>Your details stay in this browser tab. Nothing is sent.</li>
+          </ul>
+        </div>
+        <div class="wizard-card" id="wizard" data-reveal>
+          <div class="stepper" id="stepper" aria-hidden="true"></div>
+          <form id="wzForm" novalidate>
+            <section class="wz-step" data-step="1">
+              <div class="wz-count">Step 1 of 7</div><h3>Where would you like to go?</h3>
+              <p class="sub">Choose a temple or a ready-made route.</p>
+              <p class="prefill-note" id="prefillNote" hidden></p>
+              <label class="field"><span>Destination</span><select id="wDest"><option value="">Select a destination</option></select></label>
+            </section>
+            <section class="wz-step" data-step="2" hidden>
+              <div class="wz-count">Step 2 of 7</div><h3>When are you thinking of travelling?</h3>
+              <p class="sub">Dates are a preference. Availability is not checked here.</p>
+              <div class="row2">
+                <label class="field"><span>Start date</span><input type="date" id="wStart" /></label>
+                <label class="field"><span>End date</span><input type="date" id="wEnd" /></label>
+              </div>
+              <label class="check"><input type="checkbox" id="wFlex" /> My dates are flexible</label>
+            </section>
+            <section class="wz-step" data-step="3" hidden>
+              <div class="wz-count">Step 3 of 7</div><h3>Who is travelling?</h3>
+              <p class="sub">Include everyone who will join.</p>
+              <div class="counter"><div><b>Adults</b><small>Age 18 to 59</small></div><div class="ctl"><button type="button" data-c="adults" data-d="-1" aria-label="Fewer adults">-</button><output id="o-adults">2</output><button type="button" data-c="adults" data-d="1" aria-label="More adults">+</button></div></div>
+              <div class="counter"><div><b>Children</b><small>Under 18</small></div><div class="ctl"><button type="button" data-c="children" data-d="-1" aria-label="Fewer children">-</button><output id="o-children">0</output><button type="button" data-c="children" data-d="1" aria-label="More children">+</button></div></div>
+              <div class="counter"><div><b>Senior travellers</b><small>Age 60 and above</small></div><div class="ctl"><button type="button" data-c="seniors" data-d="-1" aria-label="Fewer seniors">-</button><output id="o-seniors">0</output><button type="button" data-c="seniors" data-d="1" aria-label="More seniors">+</button></div></div>
+            </section>
+            <section class="wz-step" data-step="4" hidden>
+              <div class="wz-count">Step 4 of 7</div><h3>How would you like to travel?</h3>
+              <p class="sub">Not sure? Choose "Help me choose".</p>
+              <div class="opts" id="travelOpts"></div>
+            </section>
+            <section class="wz-step" data-step="5" hidden>
+              <div class="wz-count">Step 5 of 7</div><h3>What kind of stay suits you?</h3>
+              <p class="sub">These are preferences, not confirmed reservations.</p>
+              <div class="opts" id="stayOpts"></div>
+            </section>
+            <section class="wz-step" data-step="6" hidden>
+              <div class="wz-count">Step 6 of 7</div><h3>Anything we should know? <small style="font-family:var(--font-body);font-size:.5em;color:var(--ink-soft)">Optional</small></h3>
+              <p class="sub">Skip this if nothing applies.</p>
+              <div class="opts" id="needOpts" style="margin-bottom:1rem"></div>
+              <div class="row2">
+                <label class="field"><span>Language preference</span><select id="wLang"><option>English</option><option disabled>Telugu (soon)</option><option disabled>Hindi (soon)</option></select></label>
+                <label class="field"><span>Other notes</span><input type="text" id="wNotes" placeholder="Diet, pace, special occasion" /></label>
+              </div>
+            </section>
+            <section class="wz-step" data-step="7" hidden>
+              <div class="wz-count">Step 7 of 7</div><h3>Review and send your enquiry</h3>
+              <p class="sub">This is an enquiry, not a booking.</p>
+              <dl class="review" id="review"></dl>
+              <div class="row2">
+                <label class="field"><span>Your name</span><input type="text" id="wName" autocomplete="name" /></label>
+                <label class="field"><span>Phone or email</span><input type="text" id="wContact" autocomplete="email" /></label>
+              </div>
+              <label class="check"><input type="checkbox" id="wConsent" /> I agree to be contacted about this enquiry.</label>
+            </section>
+            <p class="wz-error" id="wzError" role="alert"></p>
+            <div class="wz-actions">
+              <button class="btn btn-line btn-sm" type="button" id="wzBack" style="color:var(--charcoal)">Back</button>
+              <button class="btn btn-dark" type="submit" id="wzNext">Continue</button>
+            </div>
+          </form>
+          <div class="success" id="wzSuccess" hidden>
+            <h3>Enquiry noted. Thank you.</h3>
+            <p>This is a demo, so nothing was sent. A real version would reach our team, who would reply with a clear itinerary and estimate.</p>
+            <ul class="checklist">
+              <li>Check the temple's official site for current timings and rules.</li>
+              <li>Carry a photo ID for every traveller.</li>
+              <li>Pack modest, comfortable clothing and easy-to-remove footwear.</li>
+              <li>Keep medicines and emergency contacts handy.</li>
+            </ul>
+            <button class="btn btn-dark btn-sm" type="button" id="wzRestart">Start another enquiry</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Help / FAQ -->
+    <section class="section" id="help">
+      <div class="container">
+        <div class="section-head" data-reveal><span class="kicker">Help</span><h2>Questions pilgrims often ask.</h2></div>
+        <div class="faq" id="faq" data-stagger></div>
+      </div>
+    </section>
+
+    <!-- 11 Final CTA -->
+    <section class="section final" id="cta">
+      <div class="final-sun" aria-hidden="true"></div>
+      <div class="container" data-stagger>
+        <h2>Ready for your next pilgrimage?</h2>
+        <p>Begin with a destination and we will help you shape the rest.</p>
+        <a class="btn btn-dark" href="#plan">Plan Your Journey</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- 12 Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid" data-stagger>
+        <div>
+          <a class="brand" href="#home"><svg class="brand-mark" width="38" height="38" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <path d="M32 4 A28 28 0 1 1 31.99 4" stroke="#E3C98F" stroke-opacity=".4" stroke-width="1.1"/>
+          <path d="M12 54V32a20 20 0 0 1 40 0v22" stroke="#C49A48" stroke-width="2.1" stroke-linecap="round"/>
+          <path d="M32 9C25 17 25 24 32 30C39 24 39 17 32 9Z" fill="#E3C98F"/>
+          <path d="M32 40C24 31 16 34 14 43C22 46 28 44 32 40C36 44 42 46 50 43C48 34 40 31 32 40Z" stroke="#C49A48" stroke-width="1.7" stroke-linejoin="round"/>
+          <path d="M20 54H44M25 49H39" stroke="#C49A48" stroke-width="1.7" stroke-linecap="round"/>
+          <circle cx="32" cy="35" r="2" fill="#E3C98F"/>
+        </svg><span class="brand-name">Aaradhya</span></a>
+          <p>Discover. Experience. Connect with Divinity.</p>
+        </div>
+        <div><h4>Explore</h4><ul><li><a href="#temples">Temples</a></li><li><a href="#packages">Packages</a></li><li><a href="#how">How it works</a></li></ul></div>
+        <div><h4>Support</h4><ul><li><a href="#help">FAQ</a></li><li><a href="#plan">Plan a journey</a></li><li><a href="#trust">Trust and clarity</a></li></ul></div>
+        <div><h4>Contact</h4><ul><li>hello@aaradhya.example</li><li>Demo address, not monitored</li><li>Language: English (more soon)</li></ul></div>
+      </div>
+      <div class="footer-wordmark" id="footerWordmark">
+        <h2 id="footerWordmarkText" aria-label="Aaradhya">AARADHYA</h2>
+        <p>Discover. Experience. Connect with Divinity.</p>
+      </div>
+      <p class="footer-note" data-reveal>Aaradhya is an independent planning platform and is not affiliated with any temple trust unless stated. Temple timings, rules and availability change; always confirm with the official temple website. All prices, itineraries and package details are demo content. Temple photograph credits and licence details are listed in <a href="PHOTO_CREDITS.md" target="_blank" rel="noopener">PHOTO_CREDITS.md</a>.</p>
+    </div>
+  </footer>
+
+  <!-- Floating actions -->
+  <div class="fab" id="fab">
+    <a class="btn btn-gold btn-sm" href="#plan">Plan Your Journey</a>
+    <button class="to-top" id="toTop" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg></button>
+  </div>
+
+  <dialog id="dlg" aria-label="Details"><div class="dlg" id="dlgBody"></div></dialog>
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.3.27/dist/lenis.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/art.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

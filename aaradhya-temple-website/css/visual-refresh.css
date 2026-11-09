@@ -1,0 +1,665 @@
+/* Aaradhya cinematic visual refresh — layered Krishna artwork, new mark and refined reveals. */
+:root {
+  --motion-smooth: cubic-bezier(.2,.75,.18,1);
+}
+
+/* Persistent devotional artwork behind the first chapters of the scroll. */
+body { position: relative; }
+.scroll-artwork {
+  position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none;
+  opacity: .24; visibility: visible; transform: translateZ(0);
+  will-change: opacity, transform;
+}
+.scroll-artwork img {
+  width: 100%; height: 100%; object-fit: cover; object-position: 64% 40%;
+  display: block; filter: saturate(.92) brightness(.58) contrast(1.04);
+  transform: scale(1.05); will-change: transform;
+}
+.scroll-artwork-shade {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(5,7,11,.22), rgba(5,7,11,.34) 62%, rgba(5,7,11,.56));
+}
+#main { position: relative; z-index: 1; }
+.footer { position: relative; z-index: 1; }
+
+/* These are intentionally translucent, raised panels: the Krishna artwork
+   remains visible behind and around each section as the next layer floats up. */
+.scroll-float-section {
+  position: relative; z-index: 2; margin-inline: clamp(.55rem, 2.2vw, 2rem);
+  border: 1px solid rgba(227,201,143,.22); border-radius: 28px;
+  overflow: hidden; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+  box-shadow: 0 24px 72px rgba(0,0,0,.19), inset 0 1px 0 rgba(255,255,255,.18);
+  will-change: transform;
+}
+#featured.scroll-float-section {
+  margin-top: -1.35rem;
+  background: rgba(248,245,239,.80);
+  border-radius: 28px 28px 22px 22px;
+}
+#about.scroll-float-section {
+  margin-top: -1.1rem;
+  background: linear-gradient(135deg, rgba(12,13,17,.88), rgba(23,20,24,.84));
+}
+#packages.scroll-float-section { margin-top: -1.1rem; background: rgba(248,245,239,.82); }
+.scroll-float-section > .container { position: relative; z-index: 1; }
+
+/* New Aaradhya emblem: temple arch, sacred flame and lotus. */
+.brand-mark {
+  display: block;
+  width: 40px;
+  height: 40px;
+  flex: none;
+  overflow: visible;
+  transform-origin: 50% 50%;
+  filter: drop-shadow(0 0 10px rgba(227,201,143,.16));
+  transition: transform .65s var(--motion-smooth), filter .65s ease;
+}
+.brand:hover .brand-mark {
+  transform: rotate(-5deg) scale(1.055);
+  filter: drop-shadow(0 0 14px rgba(227,201,143,.48));
+}
+.site-header .brand-mark {
+  animation: brand-mark-arrive 1.25s var(--motion-smooth) .22s both;
+}
+.footer-grid .brand-mark {
+  width: 38px;
+  height: 38px;
+}
+@keyframes brand-mark-arrive {
+  0% { opacity: 0; transform: translateY(9px) scale(.72) rotate(-18deg); filter: blur(7px); }
+  70% { opacity: 1; transform: translateY(-2px) scale(1.06) rotate(3deg); filter: blur(0) drop-shadow(0 0 13px rgba(227,201,143,.34)); }
+  100% { opacity: 1; transform: none; }
+}
+.intro-logo {
+  width: clamp(112px, 17vw, 154px);
+  filter: drop-shadow(0 0 22px rgba(227,201,143,.28));
+}
+.intro-logo #introHalo { transform-origin: 50% 50%; }
+.intro-logo #introSun { filter: drop-shadow(0 0 12px rgba(227,201,143,.9)); }
+.intro-logo #introPath { filter: drop-shadow(0 0 7px rgba(196,154,72,.45)); }
+.intro-word {
+  letter-spacing: .19em;
+  text-shadow: 0 0 28px rgba(227,201,143,.18);
+}
+.intro {
+  background:
+    linear-gradient(180deg, rgba(3,6,10,.72), rgba(6,7,10,.91)),
+    url("../assets/images/krishna-hero.webp") center 38% / cover no-repeat,
+    radial-gradient(circle at 50% 45%, #3a1a1e 0%, var(--charcoal) 70%);
+}
+.intro-bloom {
+  background: radial-gradient(circle, rgba(227,201,143,.34), rgba(196,154,72,.12) 28%, transparent 68%);
+}
+
+/* Cinematic hero: the supplied artwork is shown whole on desktop with a soft
+   full-bleed blur behind it, then tightly framed for narrow mobile screens. */
+.hero {
+  isolation: isolate;
+  background: #05080d;
+}
+.hero-photo-backdrop,
+.hero-photo-frame {
+  display: block;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.hero-photo-backdrop { z-index: 0; overflow: hidden; opacity: .62; }
+.hero-photo-backdrop img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 64% 42%;
+  filter: blur(22px) brightness(.54) saturate(.9);
+  transform: scale(1.12);
+}
+.hero-photo-frame { z-index: 1; overflow: hidden; }
+.hero-photo {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: right center;
+  opacity: 0;
+  animation: none;
+  filter: saturate(1.06) contrast(1.04);
+  transition: opacity 1.35s ease;
+  will-change: transform, opacity;
+}
+.hero-photo.ok { opacity: 1; }
+.hero.has-photo #heroTemple { display: none; }
+.hero.has-photo .hero-scene > svg:not(.hero-mandala) { display: none; }
+.hero.has-photo .hero-scene > .hero-mandala {
+  display: block;
+  opacity: .14;
+  mix-blend-mode: screen;
+}
+.hero-scene {
+  z-index: 2;
+  opacity: .24;
+  pointer-events: none;
+}
+.hero::after {
+  z-index: 2;
+  background:
+    linear-gradient(90deg,
+      rgba(3,6,10,.98) 0%,
+      rgba(3,6,10,.91) 26%,
+      rgba(3,6,10,.72) 45%,
+      rgba(3,6,10,.22) 70%,
+      rgba(3,6,10,.18) 100%),
+    linear-gradient(0deg, rgba(3,6,10,.7) 0%, transparent 42%, rgba(3,6,10,.22) 100%);
+}
+.hero-glow {
+  z-index: 3;
+  mix-blend-mode: screen;
+  opacity: .82;
+}
+.embers { z-index: 3; }
+.hero-content { z-index: 5; max-width: 670px; }
+.hero h1 {
+  text-wrap: balance;
+  text-shadow: 0 5px 32px rgba(0,0,0,.2);
+}
+.hero h1 .line:last-child .w i {
+  background-image: linear-gradient(105deg, #fffaf0 10%, #e3c98f 48%, #fffaf0 86%);
+}
+.float-chip { z-index: 5; box-shadow: 0 12px 34px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.1); }
+.scroll-cue { z-index: 5; }
+
+/* Section transitions keep the existing layout but soften each reveal edge. */
+[data-reveal], [data-stagger] > * {
+  backface-visibility: hidden;
+}
+.section-head h2 { text-wrap: balance; }
+.feature-grid .dest,
+.t-grid .t-card,
+.pkg-grid .pkg {
+  transition: transform .55s var(--motion-smooth), box-shadow .55s ease;
+}
+.feature-grid .dest:hover,
+.t-grid .t-card:hover,
+.pkg-grid .pkg:hover {
+  transform: translateY(-5px);
+}
+
+/* The oversized footer wordmark gets a warm metallic finish. */
+.footer-wordmark h2 {
+  background: none;
+  color: #e3c98f;
+  -webkit-text-fill-color: currentColor;
+}
+.footer-letter {
+  will-change: transform, opacity, filter;
+  background-image: linear-gradient(105deg, #c49a48 2%, #fff8e8 32%, #e3c98f 55%, #fffaf0 76%, #c49a48 100%);
+  background-size: 220% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text; background-clip: text;
+  color: #e3c98f; -webkit-text-fill-color: transparent;
+}
+.footer-wordmark.is-visible .footer-letter {
+  animation: aaradhya-letter-in .95s cubic-bezier(.05,.9,.1,1) forwards, footer-letter-sheen 5.8s linear infinite;
+  animation-delay: calc(var(--letter-index) * 65ms), 0s;
+}
+@keyframes footer-letter-sheen { to { background-position: -120% 0; } }
+
+/* Reduced-motion users still see every brand element and all page content. */
+@media (max-width: 760px) {
+  .hero { min-height: 94svh; padding: 7rem 0 8rem; }
+  .hero-photo {
+    object-fit: cover;
+    object-position: 65% 42%;
+  }
+  .hero-photo-backdrop img {
+    object-position: 65% center;
+    filter: blur(16px) brightness(.42);
+  }
+  .hero::after {
+    background:
+      linear-gradient(90deg, rgba(3,6,10,.88), rgba(3,6,10,.48) 65%, rgba(3,6,10,.3)),
+      linear-gradient(0deg, rgba(3,6,10,.74), transparent 55%, rgba(3,6,10,.22));
+  }
+  .hero-content { max-width: 100%; }
+  .hero-mandala { opacity: .08 !important; }
+  .intro { background-position: 66% center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-header .brand-mark { animation: none; }
+  .footer-wordmark h2 { animation: none; }
+  .footer-letter {
+    opacity: .96;
+    transform: none;
+    filter: none;
+  }
+  .hero-photo-backdrop img { transform: none; }
+}
+
+
+/* A few tiny drifting petals add atmosphere without competing with the artwork. */
+.ember-petal {
+  border-radius: 100% 0 100% 0;
+  background: linear-gradient(135deg, #fff0c8, #c49a48 72%);
+  box-shadow: 0 0 12px 2px rgba(227,201,143,.5);
+}
+@keyframes rise {
+  0% { transform: translateY(0) translateX(0) rotate(var(--petal-tilt,0deg)) scale(1); opacity: 0; }
+  10% { opacity: .9; }
+  90% { opacity: .5; }
+  100% { transform: translateY(-105vh) translateX(var(--drift,30px)) rotate(calc(var(--petal-tilt,0deg) + 120deg)) scale(.4); opacity: 0; }
+}
+
+/* Lotus-first opening: layered petals unfold before the Aaradhya wordmark. */
+.intro { overflow: hidden; }
+.intro-inner { z-index: 1; gap: clamp(.6rem, 1.5vh, 1.1rem); }
+.intro-lotus {
+  width: clamp(210px, 31vw, 310px); height: auto; overflow: visible;
+  filter: drop-shadow(0 12px 35px rgba(227,201,143,.18));
+}
+.intro-lotus .lotus-petal {
+  transform-box: view-box; transform-origin: 200px 220px;
+  will-change: transform, opacity;
+}
+.intro-lotus .lotus-aura { transform-origin: 50% 50%; filter: blur(9px); }
+.intro-lotus .lotus-drift path { transform-box: fill-box; transform-origin: center; }
+.intro-word { margin-top: -.2rem; }
+.intro-word .intro-char { display: inline-block; will-change: transform, opacity, filter; }
+.intro-word .intro-char + .intro-char { margin-left: .005em; }
+.intro-actions { margin-top: .35rem; }
+@media (max-width: 640px) {
+  .scroll-float-section { margin-inline: .45rem; border-radius: 21px; }
+  #featured.scroll-float-section { margin-top: -.85rem; border-radius: 22px 22px 18px 18px; }
+  #about.scroll-float-section, #packages.scroll-float-section { margin-top: -.7rem; }
+  .intro-lotus { width: clamp(190px, 62vw, 260px); }
+  .intro-word { font-size: clamp(2.15rem, 9vw, 3.5rem); letter-spacing: .15em; }
+  .scroll-artwork img { object-position: 66% 40%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-artwork { opacity: .22 !important; }
+  .scroll-float-section { will-change: auto; }
+  .intro-lotus .lotus-petal { opacity: 1; transform: none; }
+}
+
+
+/* -------------------------------------------------------------------------
+   Selene-inspired full-site scroll treatment.
+   One devotional artwork remains continuous behind every chapter. Sections
+   are translucent surfaces that rise/settle over it instead of switching to
+   unrelated solid page backgrounds.
+   ------------------------------------------------------------------------- */
+html, body { background: #07090d; }
+body { background-color: #07090d; }
+.scroll-artwork {
+  opacity: .60;
+  z-index: 0;
+  background: #07090d;
+}
+.scroll-artwork img {
+  filter: saturate(1.02) brightness(.74) contrast(1.06);
+  object-position: 64% 42%;
+}
+.scroll-artwork-shade {
+  background:
+    linear-gradient(180deg, rgba(4,6,10,.16), rgba(4,6,10,.28) 46%, rgba(4,6,10,.58)),
+    radial-gradient(ellipse at 50% 40%, rgba(196,154,72,.08), transparent 66%);
+}
+#main, .footer { position: relative; z-index: 1; }
+#main > section, .marquee, .footer {
+  isolation: isolate;
+}
+
+/* Keep the original palette, but let the shared artwork breathe through it. */
+#featured.scroll-float-section {
+  margin-top: -1rem;
+  background: linear-gradient(145deg, rgba(248,245,239,.76), rgba(235,226,210,.70));
+  border-color: rgba(227,201,143,.42);
+}
+#about.scroll-float-section {
+  margin-top: -1rem;
+  background: linear-gradient(135deg, rgba(12,13,17,.75), rgba(23,20,24,.68));
+}
+#packages.scroll-float-section {
+  margin-top: -1rem;
+  background: linear-gradient(145deg, rgba(248,245,239,.77), rgba(225,215,198,.70));
+}
+#how, #story, #temples, #trust, #plan, #help, #cta {
+  position: relative;
+  z-index: 2;
+  margin: 1.15rem clamp(.55rem, 2.2vw, 2rem);
+  border: 1px solid rgba(227,201,143,.24);
+  border-radius: 26px;
+  overflow: hidden;
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+  box-shadow: 0 24px 72px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.12);
+}
+#how { background: linear-gradient(135deg, rgba(14,15,19,.78), rgba(27,22,24,.70)); }
+#story { background: linear-gradient(135deg, rgba(67,28,33,.77), rgba(39,18,23,.70)); }
+#temples, #help { background: linear-gradient(145deg, rgba(248,245,239,.78), rgba(226,216,199,.70)); }
+#trust { background: linear-gradient(145deg, rgba(221,210,192,.80), rgba(193,174,145,.70)); }
+#plan { background: linear-gradient(135deg, rgba(85,35,41,.78), rgba(49,22,27,.70)); }
+#cta { background: linear-gradient(135deg, rgba(17,17,20,.78), rgba(53,30,28,.70)); }
+.marquee {
+  background: rgba(10,11,14,.76);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(227,201,143,.18);
+}
+.footer {
+  background: linear-gradient(180deg, rgba(12,13,17,.80), rgba(5,6,9,.88));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(201,163,93,.28);
+}
+
+/* The Selene-like slide edges are driven by scroll progress, not timed entry. */
+.scroll-float-section, #how, #story, #temples, #trust, #plan, #help, #cta {
+  transform-origin: 50% 0%;
+  will-change: transform, opacity, clip-path;
+}
+#footerWordmark { overflow: visible; }
+.footer-wordmark h2 {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  width: 100%;
+  overflow: visible;
+  white-space: nowrap;
+  font-size: clamp(2.7rem, 12vw, 11.5rem);
+  letter-spacing: -.075em;
+  line-height: .92;
+}
+.footer-letter-mask {
+  display: inline-flex;
+  flex: 0 0 auto;
+  overflow: visible;
+  vertical-align: baseline;
+  padding: .08em .012em .12em;
+  margin-bottom: 0;
+}
+.footer-letter {
+  display: block;
+  opacity: 0;
+  transform: translate3d(0, .72em, 0) rotateX(-50deg);
+  transform-origin: 50% 100%;
+  filter: blur(13px);
+  background-image: linear-gradient(105deg, #c49a48 2%, #fff8e8 32%, #e3c98f 55%, #fffaf0 76%, #c49a48 100%);
+  background-size: 220% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.footer-wordmark.is-visible .footer-letter {
+  animation: footer-full-letter-in .95s cubic-bezier(.05,.9,.1,1) both;
+  animation-delay: calc(var(--letter-index) * 85ms);
+}
+@keyframes footer-full-letter-in {
+  0% { opacity: 0; transform: translate3d(0,.72em,0) rotateX(-50deg); filter: blur(13px); }
+  72% { opacity: 1; transform: translate3d(0,-.045em,0) rotateX(5deg); filter: blur(0); }
+  100% { opacity: 1; transform: translate3d(0,0,0) rotateX(0); filter: blur(0); }
+}
+
+/* A fuller, slower lotus bloom with visible petal depth and a clean name reveal. */
+.intro-lotus {
+  width: clamp(230px, 34vw, 360px);
+  filter: drop-shadow(0 16px 42px rgba(227,201,143,.24));
+}
+.intro-lotus .lotus-petal {
+  transform-box: view-box;
+  transform-origin: 200px 220px;
+  backface-visibility: hidden;
+}
+.intro-lotus .lotus-aura {
+  filter: blur(12px);
+}
+.intro-word {
+  font-size: clamp(2.8rem, 7vw, 5.1rem);
+  letter-spacing: .2em;
+  text-shadow: 0 0 34px rgba(227,201,143,.24), 0 3px 26px rgba(0,0,0,.4);
+}
+.intro-word .intro-char {
+  display: inline-block;
+  transform-style: preserve-3d;
+  will-change: transform, opacity, filter;
+}
+.intro-tag { letter-spacing: .045em; }
+.intro-bloom {
+  width: min(76vmin, 680px);
+  height: min(76vmin, 680px);
+  background: radial-gradient(circle, rgba(255,231,185,.28), rgba(196,154,72,.12) 34%, transparent 70%);
+}
+@media (max-width: 760px) {
+  .scroll-artwork { opacity: .52; }
+  .scroll-artwork img { object-position: 68% 42%; filter: saturate(.96) brightness(.66); }
+  #how, #story, #temples, #trust, #plan, #help, #cta {
+    margin-inline: .45rem;
+    border-radius: 20px;
+  }
+  .footer-wordmark h2 { font-size: clamp(2.4rem, 12vw, 5rem); letter-spacing: -.07em; }
+  .intro-lotus { width: clamp(210px, 68vw, 290px); }
+  .intro-word { font-size: clamp(2.25rem, 10vw, 3.8rem); letter-spacing: .14em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-artwork { opacity: .3 !important; }
+  .scroll-float-section, #how, #story, #temples, #trust, #plan, #help, #cta, .footer {
+    clip-path: none !important;
+    transform: none !important;
+    will-change: auto;
+  }
+  .footer-letter { opacity: 1; transform: none; filter: none; }
+}
+
+
+/* -------------------------------------------------------------------------
+   Aaradhya refinement: artwork-first page, content-only floating reveals.
+   The Krishna artwork is the continuous canvas; sections no longer become
+   large opaque cards or move as entire panels.
+   ------------------------------------------------------------------------- */
+html, body {
+  background: #07090d !important;
+}
+.scroll-artwork {
+  opacity: .88 !important;
+  background: #07090d;
+}
+.scroll-artwork img {
+  filter: saturate(1.08) brightness(.86) contrast(1.08) !important;
+  object-position: 64% 42%;
+}
+.scroll-artwork-shade {
+  background:
+    linear-gradient(180deg,
+      rgba(4,6,10,.16) 0%,
+      rgba(4,6,10,.24) 48%,
+      rgba(4,6,10,.42) 100%),
+    linear-gradient(90deg, rgba(4,6,10,.18), transparent 42%, rgba(4,6,10,.12));
+}
+
+/* Remove the full-width slide cards that were causing overlaps and blocking
+   the artwork. The content itself will float in, not its section wrapper. */
+#main > section,
+#main > section.scroll-float-section,
+#featured.scroll-float-section,
+#about.scroll-float-section,
+#packages.scroll-float-section,
+#how, #story, #temples, #trust, #plan, #help, #cta {
+  position: relative;
+  z-index: 1;
+  margin: 0 !important;
+  padding: clamp(4.8rem, 8.5vw, 7.8rem) 0;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  overflow: visible !important;
+  clip-path: none !important;
+  transform: none;
+  will-change: auto;
+}
+#main > section::before,
+#main > section::after {
+  pointer-events: none;
+}
+#main > section.on-dark::before,
+#main > section.on-maroon::before {
+  opacity: .13;
+}
+
+/* The fixed artwork stays visible between sections; text sits directly above
+   it, while actual cards and forms retain their own readable surfaces. */
+#main > section,
+#main > section h2,
+#main > section h3,
+#main > section .section-head h2,
+#main > section .kicker {
+  color: var(--ivory);
+}
+#main > section .section-head p,
+#story .container > div > p,
+#trust .trust-item p,
+#cta p,
+#help .faq .ans {
+  color: rgba(248,245,239,.82) !important;
+}
+#featured .section-head,
+#about .section-head,
+#packages .section-head,
+#how .section-head,
+#story .container > div,
+#temples .section-head,
+#trust .section-head,
+#plan .wizard-intro,
+#help .section-head {
+  text-shadow: 0 2px 18px rgba(0,0,0,.28);
+}
+#featured .dest,
+#packages .pkg,
+#temples .t-card,
+#plan .wizard-card {
+  text-shadow: none;
+}
+
+/* Trust section: remove the washed-out sand slab and give its copy contrast. */
+#trust .trust-item {
+  border-top: 1px solid rgba(227,201,143,.72);
+  padding: 1.2rem 1rem 0 0;
+}
+#trust .trust-item h3 {
+  color: var(--ivory);
+}
+#trust .disclaimer {
+  display: block;
+  width: min(100%, 760px);
+  margin-top: 1.5rem;
+  padding: 1.05rem 1.25rem;
+  color: rgba(248,245,239,.9);
+  background: rgba(8,10,14,.58);
+  border-left: 2px solid var(--gold);
+  box-shadow: 0 12px 34px rgba(0,0,0,.16);
+}
+
+/* Keep form, package and temple cards legible as individual content elements. */
+#packages .pkg,
+#temples .t-card,
+#plan .wizard-card {
+  color: var(--charcoal);
+}
+#packages .pkg h3,
+#temples .t-card h3,
+#plan .wizard-card h3 {
+  color: var(--charcoal);
+}
+#packages .pkg p,
+#temples .t-card p,
+#plan .wizard-card p {
+  color: var(--ink-soft);
+}
+#temples .toolbar .field,
+#temples .toolbar .btn {
+  text-shadow: none;
+}
+#help .faq details {
+  border-bottom-color: rgba(248,245,239,.24);
+}
+#help .faq summary {
+  color: var(--ivory);
+}
+
+/* The final call-to-action was inheriting dark body text over a dark surface.
+   Keep it light and use the signature gold action button. */
+#cta {
+  color: var(--ivory) !important;
+  text-align: center;
+}
+#cta h2 {
+  color: var(--ivory) !important;
+  text-shadow: 0 3px 24px rgba(0,0,0,.45);
+}
+#cta p {
+  color: rgba(248,245,239,.84) !important;
+}
+#cta .btn-dark {
+  color: #191919 !important;
+  background: linear-gradient(135deg, #e3c98f, #c49a48);
+  border-color: #e3c98f;
+}
+#cta .final-sun {
+  opacity: .36;
+}
+
+/* The shared artwork continues through the footer rather than disappearing
+   behind an opaque charcoal rectangle. */
+.footer {
+  background: linear-gradient(180deg, rgba(8,10,14,.54), rgba(5,6,9,.68)) !important;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  border-top: 1px solid rgba(227,201,143,.25);
+  position: relative;
+  z-index: 2;
+}
+.marquee {
+  background: rgba(7,9,13,.42) !important;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+/* No parent panel is clipped or translated; only these content nodes animate. */
+#main > section,
+#main > section.scroll-float-section {
+  opacity: 1 !important;
+}
+@media (max-width: 760px) {
+  #main > section,
+  #main > section.scroll-float-section {
+    padding-block: 4.4rem;
+    margin-inline: 0 !important;
+  }
+  #trust .trust-item { padding-right: 0; }
+  .scroll-artwork { opacity: .78 !important; }
+  .scroll-artwork img { object-position: 68% 42%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #main > section,
+  #main > section.scroll-float-section {
+    transform: none !important;
+    clip-path: none !important;
+  }
+}
+
+
+#story .facts {
+  border-block-color: rgba(248,245,239,.28);
+}
+#story .facts dd {
+  color: var(--ivory);
+}
+#main > section .section-head h2,
+#story h2,
+#wizardIntro h2 {
+  text-shadow: 0 3px 26px rgba(0,0,0,.42);
+}

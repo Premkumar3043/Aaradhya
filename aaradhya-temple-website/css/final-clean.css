@@ -1,0 +1,522 @@
+/* Aaradhya final release polish.
+   Scroll motion follows the supplied Selene source: one Lenis RAF loop and
+   crisp IntersectionObserver reveals (opacity + translateY only). */
+
+:root {
+  --cinematic-ivory: #fff8ec;
+  --cinematic-muted: rgba(255, 248, 237, .90);
+  --cinematic-gold: #f0cf88;
+}
+
+/* Selene/Lenis base styles. The JS runs Lenis and subscribers in one RAF loop. */
+html.lenis,
+html.lenis body { height: auto; }
+html.lenis.lenis-smooth { scroll-behavior: auto !important; }
+html.lenis.lenis-stopped { overflow: clip; }
+html.lenis.lenis-smooth iframe { pointer-events: none; }
+
+html, body {
+  background: #05070b !important;
+  overflow-x: clip;
+}
+body {
+  position: relative;
+  color: var(--cinematic-ivory);
+}
+#main, .footer, .marquee {
+  position: relative;
+  z-index: 1;
+  background: transparent !important;
+}
+
+/* One uninterrupted Krishna artwork remains the canvas from hero to footer. */
+.scroll-artwork {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  opacity: .98 !important;
+  visibility: visible;
+  pointer-events: none;
+  overflow: hidden;
+  background: #05070b;
+  transform: translateZ(0);
+}
+.scroll-artwork img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 64% 42%;
+  filter: brightness(1.02) saturate(1.12) contrast(1.08) !important;
+  transform: scale(1.04);
+  will-change: transform;
+}
+.scroll-artwork-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(4,6,10,.10), rgba(4,6,10,.17) 45%, rgba(4,6,10,.28)),
+    linear-gradient(90deg, rgba(4,6,10,.10), transparent 42%, rgba(4,6,10,.08));
+}
+
+/* Section shells are stable and transparent. Only their content animates. */
+#main > section:not(.hero),
+#main > section.scroll-float-section,
+#featured.scroll-float-section,
+#about.scroll-float-section,
+#packages.scroll-float-section,
+#how, #story, #temples, #trust, #plan, #help, #cta {
+  position: relative;
+  z-index: 1;
+  margin: 0 !important;
+  padding: clamp(4.8rem, 8vw, 7.5rem) 0;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  overflow: visible !important;
+  clip-path: none !important;
+  transform: none !important;
+  filter: none !important;
+  will-change: auto !important;
+}
+#main > section:not(.hero) > .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Selene's reveal contract, adapted to Aaradhya content: no blur, no filters,
+   no scaling, no whole-panel movement, and no opacity scrubbing on exit. */
+[data-reveal],
+[data-stagger] > * {
+  filter: none !important;
+  backface-visibility: visible !important;
+  transform-style: flat !important;
+  will-change: opacity, transform;
+}
+.js-motion-ready [data-reveal]:not(.is-in),
+.js-motion-ready [data-stagger] > *:not(.is-in) {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+}
+.js-motion-ready [data-reveal],
+.js-motion-ready [data-stagger] > * {
+  transition:
+    opacity 1s cubic-bezier(.2,.7,.1,1),
+    transform 1s cubic-bezier(.2,.7,.1,1);
+  transition-delay: calc(var(--reveal-order, 0) * 62ms);
+  filter: none !important;
+  backface-visibility: visible !important;
+  transform-style: flat !important;
+}
+.js-motion-ready [data-reveal].is-in,
+.js-motion-ready [data-stagger] > *.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Keep headings, labels and body copy bright and crisp over the artwork. */
+#main > section:not(.hero),
+#main > section:not(.hero) h2,
+#main > section:not(.hero) h3,
+#main > section:not(.hero) h4,
+#main > section:not(.hero) dt,
+#main > section:not(.hero) dd,
+#main > section:not(.hero) li {
+  color: var(--cinematic-ivory);
+}
+#main > section:not(.hero) .section-head h2,
+#main > section:not(.hero) h2 {
+  color: #fffaf1 !important;
+  text-shadow: 0 3px 26px rgba(0,0,0,.55), 0 0 18px rgba(227,201,143,.10);
+}
+#main > section:not(.hero) .section-head p,
+#main > section:not(.hero) p,
+#main > section:not(.hero) .sub {
+  color: var(--cinematic-muted);
+  text-shadow: 0 2px 16px rgba(0,0,0,.32);
+}
+#main > section:not(.hero) .kicker {
+  color: var(--cinematic-gold) !important;
+  text-shadow: 0 0 14px rgba(227,201,143,.22);
+}
+#main > section:not(.hero) .gold-rule {
+  box-shadow: 0 0 12px rgba(227,201,143,.3);
+}
+#about .pillar h3,
+#how .step h3,
+#trust .trust-item h3 {
+  color: #fff9ee !important;
+  text-shadow: 0 2px 16px rgba(0,0,0,.44);
+}
+#about .pillar p,
+#how .step p,
+#trust .trust-item p,
+#story p,
+#help .faq p {
+  color: rgba(255,249,239,.90) !important;
+}
+
+/* Preserve the designed cards/forms as individual surfaces, not slide panels. */
+#packages .pkg,
+#temples .t-card,
+#plan .wizard-card {
+  color: var(--charcoal);
+  text-shadow: none;
+}
+#packages .pkg h3,
+#temples .t-card h3,
+#plan .wizard-card h3 {
+  color: var(--charcoal) !important;
+  text-shadow: none !important;
+}
+#packages .pkg p,
+#temples .t-card p,
+#plan .wizard-card p {
+  color: var(--ink-soft) !important;
+  text-shadow: none !important;
+}
+#featured .dest,
+#packages .pkg,
+#temples .t-card {
+  box-shadow: 0 18px 48px rgba(0,0,0,.25), 0 1px 0 rgba(255,255,255,.14) inset;
+}
+#featured .dest:hover,
+#packages .pkg:hover,
+#temples .t-card:hover {
+  box-shadow: 0 24px 64px rgba(0,0,0,.32), 0 1px 0 rgba(255,255,255,.22) inset;
+}
+
+/* Trust content no longer appears as a washed-out cream slab. */
+#trust { background: transparent !important; }
+#trust .trust-item {
+  border-top: 1px solid rgba(240,207,136,.70);
+  padding: 1.2rem 1rem 0 0;
+}
+#trust .disclaimer {
+  display: block;
+  width: min(100%, 760px);
+  margin-top: 1.5rem;
+  padding: 1.05rem 1.25rem;
+  color: rgba(255,250,242,.96) !important;
+  background: rgba(5,8,13,.68);
+  border-left: 2px solid var(--gold);
+  box-shadow: 0 12px 32px rgba(0,0,0,.22);
+  text-shadow: none !important;
+}
+
+/* Footer shares the same artwork canvas while retaining readable contrast. */
+.footer {
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(180deg, rgba(5,7,11,.66), rgba(5,7,11,.86)) !important;
+  border-top: 1px solid rgba(227,201,143,.24);
+}
+.marquee {
+  background: rgba(5,7,11,.34) !important;
+}
+.footer-note {
+  color: rgba(255,248,237,.78) !important;
+}
+
+/* Intro: play the isolated lotus clip at its native speed, then reveal the
+   brand name. No duplicate flower, echo lettering, or competing orbit animation. */
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 48%, rgba(222,190,137,.14), transparent 46%),
+    linear-gradient(180deg, rgba(3,5,9,.92), rgba(3,5,9,.98)),
+    url("../assets/images/krishna-hero.webp") center 38% / cover no-repeat,
+    #030509;
+}
+.intro-bloom {
+  filter: none !important;
+  background: radial-gradient(circle, rgba(255,239,207,.24), rgba(196,154,72,.08) 36%, transparent 70%);
+}
+.intro-inner {
+  width: min(94vw, 900px);
+  gap: .42rem;
+}
+.intro-flower-stage {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  width: clamp(300px, 44vw, 520px);
+  aspect-ratio: 350 / 185;
+  margin: -.1rem auto -.2rem;
+}
+.intro-lotus-animation {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  opacity: 1;
+  background: transparent;
+  filter: none !important;
+  mix-blend-mode: normal;
+  transform: none;
+  will-change: auto;
+}
+.intro-word {
+  position: relative;
+  z-index: 2;
+  margin-top: .05rem;
+  color: #fff9ec;
+  font-size: clamp(2.6rem, 6.4vw, 5.1rem);
+  line-height: 1.08;
+  letter-spacing: .17em;
+  text-shadow: 0 2px 24px rgba(0,0,0,.55), 0 0 20px rgba(255,232,190,.18);
+}
+.intro-word .intro-char {
+  display: inline-block;
+  opacity: 0;
+  transform: translate3d(0, 22px, 0);
+  will-change: opacity, transform;
+}
+.intro-tag {
+  color: rgba(255,244,225,.94);
+  letter-spacing: .045em;
+  text-shadow: 0 2px 16px rgba(0,0,0,.6);
+  opacity: 0;
+}
+.intro-actions {
+  margin-top: .42rem;
+  opacity: 0;
+}
+.intro-static .intro-word .intro-char,
+.intro-static .intro-word {
+  opacity: 1 !important;
+  transform: none !important;
+}
+.intro-static .intro-tag,
+.intro-static .intro-actions {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* The footer wordmark is sharp, metallic and repeatable on viewport re-entry. */
+#footerWordmarkText {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: baseline;
+  justify-content: center;
+  gap: .015em;
+  width: 100% !important;
+  max-width: 100%;
+  min-width: 0;
+  overflow: visible !important;
+  white-space: nowrap !important;
+  margin: 0;
+  padding: .06em 0 .12em;
+  color: #e5c47e !important;
+  background: none !important;
+  -webkit-text-fill-color: currentColor !important;
+  font-size: clamp(2.45rem, 10.3vw, 9.2rem) !important;
+  line-height: 1;
+  letter-spacing: -.065em !important;
+}
+.footer-letter-mask {
+  display: inline-flex;
+  flex: 0 0 auto;
+  overflow: visible;
+  vertical-align: baseline;
+  padding: .06em .012em .11em;
+  margin: 0;
+}
+.footer-letter {
+  display: block;
+  opacity: 1;
+  color: #e5c47e;
+  -webkit-text-fill-color: transparent !important;
+  background-image: linear-gradient(112deg, #c49a48 0%, #fff7e6 24%, #e5c47e 45%, #fffdf3 62%, #c49a48 100%);
+  background-size: 230% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  transform: none;
+  filter: none !important;
+  will-change: transform, opacity, background-position;
+}
+.footer-wordmark.is-split:not(.is-visible) .footer-letter {
+  opacity: 0;
+  transform: translate3d(0,.34em,0);
+  filter: none !important;
+}
+.footer-wordmark.is-visible .footer-letter {
+  animation:
+    footer-clean-letter-in .86s cubic-bezier(.05,.9,.1,1) both,
+    footer-clean-sheen 5.8s linear 1s infinite;
+  animation-delay: calc(var(--letter-index) * 78ms), 1s;
+}
+@keyframes footer-clean-letter-in {
+  0% { opacity: 0; transform: translate3d(0,.34em,0); }
+  72% { opacity: 1; transform: translate3d(0,-.02em,0); }
+  100% { opacity: 1; transform: translate3d(0,0,0); }
+}
+@keyframes footer-clean-sheen { to { background-position: -130% 0; } }
+
+/* Remove the custom cursor prompt only; genuine Plan Your Journey buttons stay. */
+#cursor-ring, #glass-card, .cursor-ring-outline, .glass-cursor-card {
+  display: none !important;
+}
+
+@media (max-width: 760px) {
+  .scroll-artwork img {
+    object-position: 68% 42%;
+    filter: brightness(.96) saturate(1.08) contrast(1.06) !important;
+  }
+  #main > section:not(.hero) { padding-block: 4.3rem; }
+  #trust .trust-item { padding-right: 0; }
+  .intro-flower-stage {
+    width: min(91vw, 440px);
+    margin: 0 auto -.1rem;
+  }
+  .intro-word {
+    font-size: clamp(2.1rem, 9vw, 3.6rem);
+    letter-spacing: .13em;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .js-motion-ready [data-reveal],
+  .js-motion-ready [data-stagger] > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .intro-word .intro-char,
+  .intro-tag,
+  .intro-actions,
+  .footer-wordmark.is-split:not(.is-visible) .footer-letter {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+
+/* FINAL MOTION PASS — Selene-style single RAF + Lenis, crisp content reveals. */
+html:not(.lenis) { scroll-behavior: smooth; }
+html.js-motion-ready [data-scroll-reveal] {
+  transition: none !important;
+  filter: none !important;
+  -webkit-filter: none !important;
+  backface-visibility: visible !important;
+  will-change: opacity, transform;
+}
+html.js-motion-ready [data-scroll-reveal] * {
+  filter: none !important;
+  -webkit-filter: none !important;
+}
+#main [data-reveal],
+#main [data-stagger] > *,
+.footer [data-reveal],
+.footer [data-stagger] > * {
+  filter: none !important;
+  -webkit-filter: none !important;
+  transition-property: none !important;
+}
+#main > section:not(.hero) h2,
+#main > section:not(.hero) h3,
+#main > section:not(.hero) .kicker,
+#main > section:not(.hero) p,
+#main > section:not(.hero) li,
+.footer {
+  text-rendering: optimizeLegibility;
+}
+#main > section:not(.hero) .section-head p,
+#main > section:not(.hero) p,
+#main > section:not(.hero) .pillar p,
+#main > section:not(.hero) .step p,
+#main > section:not(.hero) .trust-item p {
+  color: rgba(255,250,242,.96) !important;
+  text-shadow: 0 2px 18px rgba(0,0,0,.48);
+}
+#main > section:not(.hero) h2,
+#main > section:not(.hero) h3 {
+  text-shadow: 0 3px 24px rgba(0,0,0,.62), 0 0 16px rgba(255,231,185,.12);
+}
+#featured .dest,
+#packages .pkg,
+#temples .t-card {
+  border: 1px solid rgba(255,248,236,.18);
+  box-shadow: 0 18px 48px rgba(0,0,0,.32), 0 1px 0 rgba(255,255,255,.13) inset;
+}
+
+/* Correct, square crop for the isolated lotus sequence. It is the only flower
+   in the intro; no duplicate SVG or static lotus is layered behind it. */
+.intro-inner {
+  gap: .12rem;
+}
+.intro-flower-stage {
+  width: clamp(260px, min(43vw, 48vh), 500px);
+  aspect-ratio: 1 / 1;
+  margin: 0 auto -.35rem;
+  display: grid;
+  place-items: center;
+  overflow: visible;
+}
+.intro-lotus-animation {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  background: transparent !important;
+  filter: none !important;
+  -webkit-filter: none !important;
+  mix-blend-mode: normal !important;
+  transform: none !important;
+}
+.intro-word {
+  margin-top: -.12rem;
+  font-size: clamp(2.45rem, 6.4vw, 5rem);
+  letter-spacing: .16em;
+  color: #fffaf0;
+  text-shadow: 0 3px 26px rgba(0,0,0,.68), 0 0 22px rgba(255,235,197,.22);
+}
+.intro-word .intro-char {
+  filter: none !important;
+  -webkit-filter: none !important;
+}
+.intro-tag {
+  color: rgba(255,248,236,.96);
+}
+.intro-actions {
+  margin-top: .55rem;
+}
+.intro-bloom {
+  filter: none !important;
+  -webkit-filter: none !important;
+  opacity: .72;
+}
+.footer-letter,
+.footer-wordmark.is-split:not(.is-visible) .footer-letter,
+.footer-wordmark.is-visible .footer-letter {
+  filter: none !important;
+  -webkit-filter: none !important;
+}
+@media (max-width: 760px) {
+  .intro-flower-stage {
+    width: min(88vw, 380px);
+    aspect-ratio: 1 / 1;
+    margin-bottom: -.25rem;
+  }
+  .intro-word {
+    font-size: clamp(2.15rem, 9vw, 3.6rem);
+    letter-spacing: .12em;
+  }
+}
+@media (max-height: 700px) and (min-width: 761px) {
+  .intro-flower-stage {
+    width: min(39vw, 42vh, 390px);
+  }
+  .intro-word { font-size: clamp(2.2rem, 5vw, 3.8rem); }
+}

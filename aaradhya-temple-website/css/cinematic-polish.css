@@ -1,0 +1,693 @@
+/* Aaradhya cinematic polish: continuous art, bright content, smooth chapter motion. */
+:root {
+  --cinematic-ivory: #fff8ec;
+  --cinematic-muted: rgba(255, 248, 237, .9);
+  --cinematic-gold: #f0cf88;
+}
+
+/* The Krishna artwork is the page canvas all the way to the footer. */
+html, body {
+  background: #05070b !important;
+  overflow-x: clip;
+}
+body {
+  position: relative;
+  color: var(--cinematic-ivory);
+}
+.scroll-artwork {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  opacity: .98 !important;
+  visibility: visible;
+  pointer-events: none;
+  overflow: hidden;
+  background: #05070b;
+  transform: translateZ(0);
+}
+.scroll-artwork img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: 64% 42%;
+  filter: brightness(.98) saturate(1.13) contrast(1.08) !important;
+  transform: scale(1.04);
+  will-change: transform;
+}
+.scroll-artwork-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg,
+      rgba(4, 6, 10, .12) 0%,
+      rgba(4, 6, 10, .18) 42%,
+      rgba(4, 6, 10, .30) 100%),
+    linear-gradient(90deg,
+      rgba(4, 6, 10, .10),
+      transparent 38%,
+      rgba(4, 6, 10, .08));
+}
+#main, .footer, .marquee {
+  position: relative;
+  z-index: 1;
+  background: transparent !important;
+}
+
+/* Remove the old full-width slide panels. The content floats; the section
+   shells stay transparent and never translate, scale, clip or cover the art. */
+#main > section:not(.hero),
+#main > section.scroll-float-section,
+#featured.scroll-float-section,
+#about.scroll-float-section,
+#packages.scroll-float-section,
+#how, #story, #temples, #trust, #plan, #help, #cta {
+  position: relative;
+  z-index: 1;
+  margin: 0 !important;
+  padding: clamp(4.8rem, 8vw, 7.6rem) 0;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  overflow: visible !important;
+  clip-path: none !important;
+  transform: none;
+  will-change: auto;
+}
+#main > section:not(.hero) > .container {
+  position: relative;
+  z-index: 1;
+}
+#main > section:not(.hero) + section:not(.hero) {
+  margin-top: 0 !important;
+}
+
+/* Brighter foreground typography, with restrained glow against the artwork. */
+#main > section:not(.hero),
+#main > section:not(.hero) h2,
+#main > section:not(.hero) h3,
+#main > section:not(.hero) h4,
+#main > section:not(.hero) dt,
+#main > section:not(.hero) dd,
+#main > section:not(.hero) li {
+  color: var(--cinematic-ivory);
+}
+#main > section:not(.hero) .section-head h2,
+#main > section:not(.hero) h2 {
+  color: #fffaf1 !important;
+  text-shadow: 0 3px 30px rgba(0, 0, 0, .58), 0 0 24px rgba(227, 201, 143, .10);
+}
+#main > section:not(.hero) .section-head p,
+#main > section:not(.hero) p,
+#main > section:not(.hero) .sub {
+  color: var(--cinematic-muted);
+  text-shadow: 0 2px 18px rgba(0, 0, 0, .36);
+}
+#main > section:not(.hero) .kicker {
+  color: var(--cinematic-gold) !important;
+  text-shadow: 0 0 16px rgba(227, 201, 143, .26);
+}
+#main > section:not(.hero) .gold-rule {
+  box-shadow: 0 0 14px rgba(227, 201, 143, .34);
+}
+#about .pillar h3,
+#how .step h3,
+#trust .trust-item h3 {
+  color: #fff9ee !important;
+  text-shadow: 0 2px 18px rgba(0,0,0,.48);
+}
+#about .pillar p,
+#how .step p,
+#trust .trust-item p,
+#story p,
+#help .faq p {
+  color: rgba(255, 249, 239, .9) !important;
+}
+
+/* Keep real cards, forms and controls readable as individual surfaces. */
+#packages .pkg,
+#temples .t-card,
+#plan .wizard-card {
+  color: var(--charcoal);
+  text-shadow: none;
+}
+#packages .pkg h3,
+#temples .t-card h3,
+#plan .wizard-card h3 {
+  color: var(--charcoal) !important;
+  text-shadow: none !important;
+}
+#packages .pkg p,
+#temples .t-card p,
+#plan .wizard-card p {
+  color: var(--ink-soft) !important;
+  text-shadow: none !important;
+}
+#featured .dest,
+#packages .pkg,
+#temples .t-card {
+  box-shadow: 0 18px 54px rgba(0,0,0,.24), 0 1px 0 rgba(255,255,255,.16) inset;
+}
+#featured .dest:hover,
+#packages .pkg:hover,
+#temples .t-card:hover {
+  box-shadow: 0 26px 72px rgba(0,0,0,.34), 0 1px 0 rgba(255,255,255,.24) inset;
+}
+
+/* The trust chapter must not turn into a washed-out cream rectangle. */
+#trust {
+  background: transparent !important;
+}
+#trust .trust-item {
+  border-top: 1px solid rgba(240, 207, 136, .72);
+  padding: 1.25rem 1rem 0 0;
+}
+#trust .disclaimer {
+  display: block;
+  width: min(100%, 760px);
+  margin-top: 1.5rem;
+  padding: 1.05rem 1.25rem;
+  color: rgba(255, 250, 242, .95) !important;
+  background: rgba(5, 8, 13, .66);
+  border-left: 2px solid var(--gold);
+  box-shadow: 0 12px 34px rgba(0,0,0,.22);
+  text-shadow: none !important;
+}
+
+/* FAQ and the final CTA remain crisp against the dark artwork. */
+#help .faq summary {
+  color: #fff9ee !important;
+  text-shadow: 0 2px 15px rgba(0,0,0,.42);
+}
+#help .faq details {
+  background: rgba(6, 8, 12, .28);
+  border-bottom-color: rgba(240, 207, 136, .28);
+}
+#cta {
+  color: var(--cinematic-ivory) !important;
+  text-align: center;
+}
+#cta h2 {
+  color: #fffaf1 !important;
+  text-shadow: 0 4px 32px rgba(0,0,0,.6), 0 0 30px rgba(227,201,143,.12);
+}
+#cta p {
+  color: rgba(255,248,237,.94) !important;
+}
+#cta .btn-dark {
+  color: #191919 !important;
+  background: linear-gradient(135deg, #fff0c9, #d5ae65);
+  border-color: #e7c98d;
+  box-shadow: 0 12px 35px rgba(196,154,72,.26);
+}
+
+/* Continuous footer artwork: dark enough to keep links legible, never opaque. */
+.footer {
+  background: linear-gradient(180deg, rgba(5,7,11,.58), rgba(4,5,8,.76)) !important;
+  border-top: 1px solid rgba(240,207,136,.24);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+.marquee {
+  background: rgba(5,7,11,.42) !important;
+  border-block: 1px solid rgba(240,207,136,.16);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+/* Selene-style scroll handoff: only content nodes animate, never the slide shell. */
+[data-reveal],
+[data-stagger] > *,
+.feature-grid > *,
+.pkg-grid > *,
+.t-grid > *,
+.pillars > *,
+.how .step,
+.trust > *,
+.faq > * {
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  will-change: transform, opacity, filter;
+}
+@media (hover: hover) and (pointer: fine) {
+  .feature-grid .dest,
+  .pkg-grid .pkg,
+  .t-grid .t-card {
+    transition: transform .55s cubic-bezier(.2,.75,.18,1),
+                box-shadow .55s ease,
+                filter .55s ease;
+  }
+  .feature-grid .dest:hover,
+  .pkg-grid .pkg:hover,
+  .t-grid .t-card:hover {
+    filter: brightness(1.055);
+  }
+}
+
+/* Lotus intro: one staged fold → bud → water/stem draw → complete bloom → name. */
+.intro {
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 47%, rgba(211, 176, 112, .10), transparent 46%),
+    linear-gradient(180deg, rgba(2,4,8,.91), rgba(3,5,9,.97)),
+    url("../assets/images/krishna-hero.webp") center 38% / cover no-repeat,
+    #030509;
+}
+.intro-inner {
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+  gap: clamp(.55rem, 1.3vh, .95rem);
+}
+.lotus-ripple-art {
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: 39%;
+  width: min(112vw, 980px);
+  max-width: none;
+  height: auto;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(.74);
+  mix-blend-mode: screen;
+  filter: brightness(1.18) saturate(.86) blur(.25px);
+  will-change: transform, opacity;
+}
+.intro-lotus {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: clamp(220px, 31vw, 370px);
+  height: auto;
+  max-width: 90vw;
+  overflow: visible;
+  filter: drop-shadow(0 12px 38px rgba(255,238,203,.22))
+          drop-shadow(0 0 24px rgba(227,201,143,.18));
+  will-change: transform, opacity;
+}
+.intro-lotus .lotus-petals {
+  transform-box: view-box;
+  transform-origin: 200px 220px;
+  will-change: transform;
+}
+.intro-lotus .lotus-petal {
+  transform-box: view-box;
+  transform-origin: 200px 220px;
+  backface-visibility: hidden;
+  vector-effect: non-scaling-stroke;
+}
+.intro-lotus .lotus-stem {
+  filter: drop-shadow(0 0 7px rgba(255,239,211,.34));
+}
+.intro-lotus .lotus-stem-line {
+  stroke: #fff7e8;
+  stroke-width: 4.2;
+}
+.intro-lotus .lotus-water path {
+  stroke: #f8e8c7;
+  stroke-opacity: .78;
+  stroke-width: 1.5;
+  fill: none;
+  filter: drop-shadow(0 0 5px rgba(255,241,211,.38));
+}
+.intro-lotus .lotus-aura {
+  transform-origin: 50% 50%;
+  filter: blur(11px);
+}
+.intro-lotus .lotus-center {
+  filter: drop-shadow(0 0 9px rgba(255,249,224,.95));
+}
+.intro-word {
+  position: relative;
+  z-index: 2;
+  margin-top: -.18rem;
+  color: #fff9eb;
+  font-size: clamp(2.7rem, 7.1vw, 5.2rem);
+  letter-spacing: .19em;
+  text-shadow: 0 0 30px rgba(255,231,185,.22), 0 3px 26px rgba(0,0,0,.58);
+}
+.intro-word .intro-char {
+  display: inline-block;
+  transform-style: preserve-3d;
+  will-change: transform, opacity, filter;
+}
+.intro-tag {
+  color: rgba(248,231,202,.94);
+  letter-spacing: .045em;
+  text-shadow: 0 2px 18px rgba(0,0,0,.55);
+}
+.intro-actions { margin-top: .3rem; }
+
+/* Reliable full wordmark layout; each character can animate independently. */
+#footerWordmark {
+  width: 100%;
+  overflow: visible;
+  perspective: 1100px;
+}
+#footerWordmarkText {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: baseline;
+  justify-content: center;
+  gap: .015em;
+  width: 100% !important;
+  max-width: 100%;
+  min-width: 0;
+  overflow: visible !important;
+  white-space: nowrap !important;
+  margin: 0;
+  padding: .06em 0 .12em;
+  color: #e5c47e !important;
+  background: none !important;
+  -webkit-text-fill-color: currentColor !important;
+  font-size: clamp(2.45rem, 10.3vw, 9.2rem) !important;
+  line-height: 1;
+  letter-spacing: -.065em !important;
+}
+#footerWordmarkText:not(.is-split) {
+  display: block !important;
+  text-align: center;
+}
+.footer-letter-mask {
+  display: inline-flex;
+  flex: 0 0 auto;
+  overflow: visible;
+  vertical-align: baseline;
+  padding: .06em .012em .11em;
+  margin: 0;
+}
+.footer-letter {
+  display: block;
+  opacity: 1;
+  color: #e5c47e;
+  -webkit-text-fill-color: transparent !important;
+  background-image: linear-gradient(112deg,
+    #c49a48 0%,
+    #fff7e6 24%,
+    #e5c47e 45%,
+    #fffdf3 62%,
+    #c49a48 100%);
+  background-size: 230% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  transform: none;
+  filter: none;
+  will-change: transform, opacity, filter, background-position;
+}
+.footer-wordmark.is-split:not(.is-visible) .footer-letter {
+  opacity: 0;
+  transform: translate3d(0, .58em, 0) rotateX(-48deg);
+  filter: blur(10px);
+}
+.footer-wordmark.is-visible .footer-letter {
+  animation:
+    footer-lotus-letter-in .98s cubic-bezier(.05,.9,.1,1) both,
+    footer-lotus-sheen 5.8s linear 1.15s infinite;
+  animation-delay: calc(var(--letter-index) * 78ms), 1.15s;
+}
+@keyframes footer-lotus-letter-in {
+  0% { opacity: 0; transform: translate3d(0,.58em,0) rotateX(-48deg); filter: blur(10px); }
+  74% { opacity: 1; transform: translate3d(0,-.035em,0) rotateX(4deg); filter: blur(0); }
+  100% { opacity: 1; transform: translate3d(0,0,0) rotateX(0); filter: blur(0); }
+}
+@keyframes footer-lotus-sheen {
+  to { background-position: -130% 0; }
+}
+
+#cursor-ring, #glass-card,
+.cursor-ring-outline, .glass-cursor-card {
+  display: none !important;
+}
+
+@media (max-width: 760px) {
+  .scroll-artwork img {
+    object-position: 68% 42%;
+    filter: brightness(.91) saturate(1.08) contrast(1.06) !important;
+  }
+  #main > section:not(.hero) {
+    padding-block: 4.35rem;
+  }
+  .intro-lotus {
+    width: clamp(205px, 66vw, 290px);
+  }
+  .lotus-ripple-art {
+    width: 124vw;
+    top: 40%;
+  }
+  .intro-word {
+    font-size: clamp(2.15rem, 9.3vw, 3.8rem);
+    letter-spacing: .14em;
+  }
+  #footerWordmarkText {
+    font-size: clamp(2.35rem, 11vw, 4.5rem) !important;
+    letter-spacing: -.06em !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-artwork { opacity: .92 !important; }
+  .intro-lotus, .lotus-ripple-art,
+  [data-reveal], [data-stagger] > * {
+    transform: none !important;
+    filter: none !important;
+  }
+  .footer-wordmark.is-split:not(.is-visible) .footer-letter {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+
+/* Card typography uses charcoal on its own ivory surface (not the global
+   bright-on-art treatment used for section-level copy). */
+#main #packages .pkg h3,
+#main #temples .t-card h3 {
+  color: #191919 !important;
+  text-shadow: none !important;
+}
+#main #packages .pkg p,
+#main #packages .pkg li,
+#main #packages .pkg .route,
+#main #packages .pkg .price small,
+#main #temples .t-card p,
+#main #temples .t-card .t-loc,
+#main #temples .t-card .t-meta {
+  color: #55504a !important;
+  text-shadow: none !important;
+}
+#main #plan .wizard-card,
+#main #plan .wizard-card h3,
+#main #plan .wizard-card p,
+#main #plan .wizard-card label,
+#main #plan .wizard-card small,
+#main #plan .wizard-card span,
+#main #plan .wizard-card dt,
+#main #plan .wizard-card dd {
+  color: #191919 !important;
+  text-shadow: none !important;
+}
+#main #plan .wizard-card .sub,
+#main #plan .wizard-card .wz-error {
+  color: #55504a !important;
+}
+
+
+/* -------------------------------------------------------------------------
+   Final motion cleanup: Selene's reveal model, not blur-based scroll tweens.
+   Each content element enters once with a clean lift and slight lateral drift.
+   ------------------------------------------------------------------------- */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+html.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+html.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+html.lenis.lenis-stopped {
+  overflow: hidden;
+}
+html.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+.js-motion-ready [data-reveal]:not(.is-in),
+.js-motion-ready [data-stagger] > *:not(.is-in) {
+  opacity: 0;
+  transform: translate3d(var(--reveal-x, 0px), 24px, 0);
+}
+.js-motion-ready [data-reveal],
+.js-motion-ready [data-stagger] > * {
+  transition:
+    opacity .82s cubic-bezier(.2,.7,.1,1),
+    transform .92s cubic-bezier(.2,.7,.1,1);
+  transition-delay: calc(var(--reveal-order, 0) * 58ms);
+  backface-visibility: hidden;
+  will-change: opacity, transform;
+}
+.js-motion-ready [data-reveal].is-in,
+.js-motion-ready [data-stagger] > *.is-in {
+  opacity: 1;
+  transform: translate3d(0,0,0);
+}
+
+/* No blur or opacity scrubbing on content: the background stays clear while
+   headings, cards and steps glide into their final readable positions. */
+#main > section,
+#main > section * {
+  text-rendering: optimizeLegibility;
+}
+#main > section [data-reveal],
+#main > section [data-stagger] > * {
+  filter: none !important;
+}
+#main > section .section-head h2,
+#main > section .section-head p,
+#about .pillar h3,
+#about .pillar p,
+#how .step h3,
+#how .step p,
+#trust .trust-item h3,
+#trust .trust-item p,
+#cta h2,
+#cta p {
+  opacity: 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* A single lotus asset follows the uploaded video sequence. The flower art
+   itself is sharp; only a restrained gold aura sits behind it. */
+.intro {
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 48%, rgba(218,185,128,.12), transparent 42%),
+    linear-gradient(180deg, rgba(3,5,9,.94), rgba(3,5,9,.98)),
+    url("../assets/images/krishna-hero.webp") center 38% / cover no-repeat,
+    #030509;
+}
+.intro-bloom {
+  filter: none !important;
+  background: radial-gradient(circle, rgba(255,238,198,.32), rgba(196,154,72,.12) 34%, transparent 70%);
+}
+.intro-inner {
+  width: min(94vw, 900px);
+  gap: .35rem;
+}
+.intro-flower-stage {
+  position: relative;
+  width: clamp(245px, 38vw, 430px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+  margin: -.25rem auto -.9rem;
+}
+.intro-lotus-animation {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 1;
+  filter: drop-shadow(0 10px 24px rgba(255,239,208,.16));
+  transform: translateZ(0);
+  will-change: opacity, transform;
+}
+.intro-water-orbit {
+  position: absolute;
+  left: 50%;
+  top: 65%;
+  width: 94%;
+  height: 28%;
+  border: 1px solid rgba(242,220,183,.45);
+  border-radius: 50%;
+  box-shadow: 0 0 16px rgba(232,206,158,.16), inset 0 0 16px rgba(232,206,158,.08);
+  transform: translate(-50%,-50%) scale(.76);
+  pointer-events: none;
+}
+.intro-water-orbit.orbit-two {
+  width: 78%;
+  height: 20%;
+  border-color: rgba(242,220,183,.27);
+}
+.intro-word-echo {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: 58%;
+  transform: translate(-50%,-50%);
+  width: max-content;
+  max-width: 120vw;
+  white-space: nowrap;
+  pointer-events: none;
+  color: rgba(239,211,158,.2);
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 13vw, 11rem);
+  line-height: 1;
+  letter-spacing: .18em;
+  text-shadow: 0 0 24px rgba(225,190,126,.12);
+}
+.intro-word {
+  position: relative;
+  z-index: 3;
+  color: #fff9ec;
+  margin-top: -.2rem;
+  font-size: clamp(2.6rem, 6.4vw, 5.1rem);
+  line-height: 1.08;
+  letter-spacing: .17em;
+  text-shadow: 0 2px 26px rgba(0,0,0,.55), 0 0 24px rgba(255,232,190,.2);
+}
+.intro-word .intro-char {
+  display: inline-block;
+  opacity: 1;
+  transform: translateZ(0);
+  will-change: opacity, transform;
+}
+.intro-tag {
+  color: rgba(255,244,225,.94);
+  letter-spacing: .045em;
+  text-shadow: 0 2px 18px rgba(0,0,0,.62);
+}
+.intro-actions { margin-top: .45rem; }
+
+/* Footer letters keep their crisp edge while retaining the repeatable reveal. */
+.footer-wordmark.is-split:not(.is-visible) .footer-letter {
+  opacity: 0;
+  transform: translate3d(0,.34em,0);
+  filter: none !important;
+}
+@keyframes footer-lotus-letter-in {
+  0% { opacity: 0; transform: translate3d(0,.34em,0); }
+  72% { opacity: 1; transform: translate3d(0,-.025em,0); }
+  100% { opacity: 1; transform: translate3d(0,0,0); }
+}
+
+@media (max-width: 760px) {
+  .intro-flower-stage {
+    width: clamp(235px, 72vw, 330px);
+    margin-bottom: -.6rem;
+  }
+  .intro-word {
+    font-size: clamp(2.1rem, 9vw, 3.6rem);
+    letter-spacing: .13em;
+  }
+  .intro-word-echo {
+    font-size: clamp(3.5rem, 18vw, 6.5rem);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .js-motion-ready [data-reveal],
+  .js-motion-ready [data-stagger] > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
